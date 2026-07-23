@@ -1,7 +1,7 @@
 
 package views;
 import dao.StockIssuanceDAO;
-import database.DBConnection;
+import util.DBConnection;
 import javax.swing.JOptionPane;
 
 import java.sql.Connection;
