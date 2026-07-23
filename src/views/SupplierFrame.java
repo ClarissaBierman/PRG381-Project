@@ -1,6 +1,6 @@
 package views;
 
-import Util.DBConnection;
+import util.DBConnection;
 import javax.swing.JOptionPane;
 
 /*
