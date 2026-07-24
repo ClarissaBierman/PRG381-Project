@@ -289,6 +289,10 @@ public class MaterialFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMUpdateActionPerformed
 
     private void btnMDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMDeleteActionPerformed
+        if (!"Supervisor".equalsIgnoreCase(util.CurrentUser.role)) {
+        JOptionPane.showMessageDialog(this, "Only a Supervisor can delete materials.", "Permission Denied", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
         String error = materialController.deleteMaterial(txtMMatID.getText());
         if (error == null) {
             JOptionPane.showMessageDialog(this, "Material deleted successfully.");

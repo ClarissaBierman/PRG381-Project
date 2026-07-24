@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class DashboardForm extends javax.swing.JFrame {
@@ -146,7 +147,9 @@ public class DashboardForm extends javax.swing.JFrame {
         tblRecentIssuances.getTableHeader().setForeground(new java.awt.Color(148, 163, 184));
 
         jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 23, 42));
-
+        
+        btnLogout.setBackground(new java.awt.Color(51, 65, 85));
+        btnLogout.setForeground(java.awt.Color.WHITE);
         repaint();
     }
 
@@ -180,6 +183,8 @@ public class DashboardForm extends javax.swing.JFrame {
         tblRecentIssuances.getTableHeader().setForeground(new java.awt.Color(100, 116, 139));
 
         jScrollPane1.getViewport().setBackground(new java.awt.Color(255, 255, 255));
+        btnLogout.setBackground(new java.awt.Color(226, 232, 240));
+        btnLogout.setForeground(new java.awt.Color(15, 23, 42));
 
         repaint();
 }
@@ -192,6 +197,7 @@ public class DashboardForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         lblTitle = new javax.swing.JLabel();
         lblSubtitle = new javax.swing.JLabel();
         pnlTotalMaterials = new javax.swing.JPanel();
@@ -210,6 +216,7 @@ public class DashboardForm extends javax.swing.JFrame {
         tblRecentIssuances = new javax.swing.JTable();
         lblRecentStockIssuances = new javax.swing.JLabel();
         btnToggleTheme = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miMaterials = new javax.swing.JMenuItem();
@@ -221,6 +228,8 @@ public class DashboardForm extends javax.swing.JFrame {
         miLowStockReport = new javax.swing.JMenuItem();
         miIssuanceHistory = new javax.swing.JMenuItem();
         miMaterialUsageReport = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("University Cleaning Inventory System");
@@ -373,6 +382,13 @@ public class DashboardForm extends javax.swing.JFrame {
             }
         });
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Menu");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -480,6 +496,8 @@ public class DashboardForm extends javax.swing.JFrame {
                         .addGap(305, 305, 305)
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLogout)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnToggleTheme)))
                 .addContainerGap())
         );
@@ -488,7 +506,9 @@ public class DashboardForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnToggleTheme)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnToggleTheme)
+                        .addComponent(btnLogout))
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblSubtitle)
@@ -580,6 +600,16 @@ public class DashboardForm extends javax.swing.JFrame {
         materialUsageReportForm.setVisible(true);
     }//GEN-LAST:event_miMaterialUsageReportActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION){
+            util.CurrentUser.email = null;
+            util.CurrentUser.role = null;
+            this.dispose();
+            new LoginForm().setVisible(true);
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -617,9 +647,11 @@ public class DashboardForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnToggleTheme;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLowStock;
     private javax.swing.JLabel lblLowStockLabel;

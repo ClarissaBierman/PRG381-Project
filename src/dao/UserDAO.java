@@ -44,7 +44,7 @@ public class UserDAO {
     }
 
     public boolean registerUser(User user) throws SQLException {
-        String sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users (first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -52,8 +52,25 @@ public class UserDAO {
             stmt.setString(2, user.getLastName());
             stmt.setString(3, user.getEmail());
             stmt.setString(4, user.getPassword());
+            stmt.setString(5, user.getRole());
 
             return stmt.executeUpdate() == 1;
         }
+    }
+    
+    public String getRole(String email) throws SQLException {
+        String sql = "SELECT role FROM users WHERE email = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("role");
+                }
+            }
+        }
+        return null;
     }
 }

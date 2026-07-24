@@ -25,6 +25,8 @@ public class LoginController {
             if (!authenticated) {
                 return "Invalid email or password.";
             }
+            util.CurrentUser.email = email.trim();
+            util.CurrentUser.role = userDAO.getRole(email.trim());
             return null;
         } catch (SQLException e) {
             e.printStackTrace();
