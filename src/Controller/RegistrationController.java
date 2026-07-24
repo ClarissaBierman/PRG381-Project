@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
@@ -23,7 +19,7 @@ public class RegistrationController {
     private final UserDAO userDAO = new UserDAO();
  
     public String register(String firstName, String lastName, String email,
-                            String password, String confirmPassword) {
+                            String password, String confirmPassword, String role) {
  
         if (isBlank(firstName) || isBlank(lastName) || isBlank(email)
                 || isBlank(password) || isBlank(confirmPassword)) {
@@ -51,7 +47,7 @@ public class RegistrationController {
                 return "An account with this email already exists.";
             }
  
-            User newUser = new User(firstName.trim(), lastName.trim(), email.trim(), password);
+            User newUser = new User(firstName.trim(), lastName.trim(), email.trim(), password, role);
             boolean success = userDAO.registerUser(newUser);
             return success ? null : "Registration failed. Please try again.";
  
