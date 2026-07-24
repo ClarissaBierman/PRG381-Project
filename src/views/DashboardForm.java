@@ -8,11 +8,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class DashboardForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DashboardForm
-     */
     public DashboardForm() {
         initComponents();
+        setLocationRelativeTo(null);
         getContentPane().setBackground(new java.awt.Color(15, 23, 42));
     }
     
@@ -118,8 +116,6 @@ public class DashboardForm extends javax.swing.JFrame {
         }
     }
     
-    private boolean isDarkMode = true;
-    
     private void applyDarkMode() {
         getContentPane().setBackground(new java.awt.Color(15, 23, 42));
 
@@ -214,6 +210,17 @@ public class DashboardForm extends javax.swing.JFrame {
         tblRecentIssuances = new javax.swing.JTable();
         lblRecentStockIssuances = new javax.swing.JLabel();
         btnToggleTheme = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        miMaterials = new javax.swing.JMenuItem();
+        miSuppliers = new javax.swing.JMenuItem();
+        miCleaners = new javax.swing.JMenuItem();
+        miIssuanceMaterial = new javax.swing.JMenuItem();
+        miReports = new javax.swing.JMenu();
+        miInventoryReport = new javax.swing.JMenuItem();
+        miLowStockReport = new javax.swing.JMenuItem();
+        miIssuanceHistory = new javax.swing.JMenuItem();
+        miMaterialUsageReport = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("University Cleaning Inventory System");
@@ -246,11 +253,8 @@ public class DashboardForm extends javax.swing.JFrame {
         pnlTotalMaterials.setLayout(pnlTotalMaterialsLayout);
         pnlTotalMaterialsLayout.setHorizontalGroup(
             pnlTotalMaterialsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTotalMaterialsLayout.createSequentialGroup()
-                .addGroup(pnlTotalMaterialsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTotalMaterialsLabel)
-                    .addComponent(lblTotalMaterials, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 45, Short.MAX_VALUE))
+            .addComponent(lblTotalMaterialsLabel)
+            .addComponent(lblTotalMaterials, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlTotalMaterialsLayout.setVerticalGroup(
             pnlTotalMaterialsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,11 +280,8 @@ public class DashboardForm extends javax.swing.JFrame {
         pnlLowStock.setLayout(pnlLowStockLayout);
         pnlLowStockLayout.setHorizontalGroup(
             pnlLowStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLowStockLayout.createSequentialGroup()
-                .addGroup(pnlLowStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLowStockLabel)
-                    .addComponent(lblLowStock, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 43, Short.MAX_VALUE))
+            .addComponent(lblLowStockLabel)
+            .addComponent(lblLowStock, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlLowStockLayout.setVerticalGroup(
             pnlLowStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,11 +307,8 @@ public class DashboardForm extends javax.swing.JFrame {
         pnlTotalCleaners.setLayout(pnlTotalCleanersLayout);
         pnlTotalCleanersLayout.setHorizontalGroup(
             pnlTotalCleanersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTotalCleanersLayout.createSequentialGroup()
-                .addGroup(pnlTotalCleanersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTotalCleanersLabel)
-                    .addComponent(lblTotalCleaners, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 43, Short.MAX_VALUE))
+            .addComponent(lblTotalCleanersLabel)
+            .addComponent(lblTotalCleaners, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlTotalCleanersLayout.setVerticalGroup(
             pnlTotalCleanersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,11 +334,8 @@ public class DashboardForm extends javax.swing.JFrame {
         pnlRecentCount.setLayout(pnlRecentCountLayout);
         pnlRecentCountLayout.setHorizontalGroup(
             pnlRecentCountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRecentCountLayout.createSequentialGroup()
-                .addGroup(pnlRecentCountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRecentCountLabel)
-                    .addComponent(lblRecentCount, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(lblRecentCountLabel)
+            .addComponent(lblRecentCount, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlRecentCountLayout.setVerticalGroup(
             pnlRecentCountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,12 +366,87 @@ public class DashboardForm extends javax.swing.JFrame {
         lblRecentStockIssuances.setForeground(new java.awt.Color(255, 255, 255));
         lblRecentStockIssuances.setText("Recent Stock Issuances");
 
-        btnToggleTheme.setText("Toggle Theme");
+        btnToggleTheme.setText("☀ Light");
         btnToggleTheme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnToggleThemeActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("Menu");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        miMaterials.setText("Materials");
+        miMaterials.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miMaterialsActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miMaterials);
+
+        miSuppliers.setText("Suppliers");
+        miSuppliers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSuppliersActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miSuppliers);
+
+        miCleaners.setText("Cleaners");
+        miCleaners.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCleanersActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miCleaners);
+
+        miIssuanceMaterial.setText("Issuance Material");
+        miIssuanceMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miIssuanceMaterialActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miIssuanceMaterial);
+
+        miReports.setText("Reports");
+
+        miInventoryReport.setText("Inventory Report");
+        miInventoryReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miInventoryReportActionPerformed(evt);
+            }
+        });
+        miReports.add(miInventoryReport);
+
+        miLowStockReport.setText("Low Stock Report");
+        miLowStockReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLowStockReportActionPerformed(evt);
+            }
+        });
+        miReports.add(miLowStockReport);
+
+        miIssuanceHistory.setText("Issuance History Report");
+        miIssuanceHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miIssuanceHistoryActionPerformed(evt);
+            }
+        });
+        miReports.add(miIssuanceHistory);
+
+        miMaterialUsageReport.setText("Material Usage Report");
+        miMaterialUsageReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miMaterialUsageReportActionPerformed(evt);
+            }
+        });
+        miReports.add(miMaterialUsageReport);
+
+        jMenu1.add(miReports);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -385,57 +455,54 @@ public class DashboardForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pnlLowStock, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pnlTotalCleaners, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(pnlTotalMaterials, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                    .addComponent(pnlRecentCount, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addComponent(btnToggleTheme))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(196, 196, 196)
-                                .addComponent(lblRecentStockIssuances))))
+                                .addGap(28, 28, 28)
+                                .addComponent(pnlLowStock, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pnlTotalMaterials, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pnlTotalCleaners, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pnlRecentCount, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(147, 147, 147)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(196, 196, 196)
+                                        .addComponent(lblRecentStockIssuances))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(326, 326, 326)
+                                .addComponent(lblSubtitle)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
-                        .addComponent(lblSubtitle)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addGap(305, 305, 305)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnToggleTheme)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(btnToggleTheme)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(lblSubtitle)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnToggleTheme)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSubtitle)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTotalMaterials, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlLowStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pnlRecentCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addComponent(pnlTotalCleaners, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(pnlLowStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlTotalCleaners, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlRecentCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(lblRecentStockIssuances)
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -444,21 +511,74 @@ public class DashboardForm extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         loadDashboardData();
         tblRecentIssuances.setRowHeight(28);
-        applyDarkMode();
-        btnToggleTheme.setText("☀ Light");
-    }//GEN-LAST:event_formWindowOpened
-
-    private void btnToggleThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleThemeActionPerformed
-        isDarkMode = !isDarkMode;
-
-        if (isDarkMode) {
+        if (util.ThemeManager.isDarkMode) {
             applyDarkMode();
             btnToggleTheme.setText("☀ Light");
         } else {
             applyLightMode();
             btnToggleTheme.setText("🌙 Dark");
         }
+        btnToggleTheme.setText("☀ Light");
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnToggleThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleThemeActionPerformed
+        util.ThemeManager.isDarkMode = !util.ThemeManager.isDarkMode;
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+    }
     }//GEN-LAST:event_btnToggleThemeActionPerformed
+
+    private void miMaterialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMaterialsActionPerformed
+        this.setVisible(false);
+        MaterialFrame materialFrame = new MaterialFrame();
+        materialFrame.setVisible(true);
+    }//GEN-LAST:event_miMaterialsActionPerformed
+
+    private void miSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSuppliersActionPerformed
+        this.setVisible(false);
+        SupplierFrame supplierFrame = new SupplierFrame();
+        supplierFrame.setVisible(true);
+    }//GEN-LAST:event_miSuppliersActionPerformed
+
+    private void miCleanersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCleanersActionPerformed
+        this.setVisible(false);
+        CleanerFrame cleanerFrame = new CleanerFrame();
+        cleanerFrame.setVisible(true);
+    }//GEN-LAST:event_miCleanersActionPerformed
+
+    private void miIssuanceMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miIssuanceMaterialActionPerformed
+        this.setVisible(false);
+        IssueMaterialForm issueMaterialForm = new IssueMaterialForm();
+        issueMaterialForm.setVisible(true);
+    }//GEN-LAST:event_miIssuanceMaterialActionPerformed
+
+    private void miInventoryReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInventoryReportActionPerformed
+        this.setVisible(false);
+        InventoryReportForm inventoryReportForm = new InventoryReportForm();
+        inventoryReportForm.setVisible(true);
+    }//GEN-LAST:event_miInventoryReportActionPerformed
+
+    private void miLowStockReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLowStockReportActionPerformed
+        this.setVisible(false);
+        LowStockReportForm lowStockReportForm = new LowStockReportForm();
+        lowStockReportForm.setVisible(true);
+    }//GEN-LAST:event_miLowStockReportActionPerformed
+
+    private void miIssuanceHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miIssuanceHistoryActionPerformed
+        this.setVisible(false);
+        IssuanceHistoryForm issuanceHistoryForm = new IssuanceHistoryForm();
+        issuanceHistoryForm.setVisible(true);
+    }//GEN-LAST:event_miIssuanceHistoryActionPerformed
+
+    private void miMaterialUsageReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMaterialUsageReportActionPerformed
+        this.setVisible(false);
+        MaterialUsageReportForm materialUsageReportForm = new MaterialUsageReportForm();
+        materialUsageReportForm.setVisible(true);
+    }//GEN-LAST:event_miMaterialUsageReportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -498,6 +618,8 @@ public class DashboardForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnToggleTheme;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLowStock;
     private javax.swing.JLabel lblLowStockLabel;
@@ -510,6 +632,15 @@ public class DashboardForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblTotalCleanersLabel;
     private javax.swing.JLabel lblTotalMaterials;
     private javax.swing.JLabel lblTotalMaterialsLabel;
+    private javax.swing.JMenuItem miCleaners;
+    private javax.swing.JMenuItem miInventoryReport;
+    private javax.swing.JMenuItem miIssuanceHistory;
+    private javax.swing.JMenuItem miIssuanceMaterial;
+    private javax.swing.JMenuItem miLowStockReport;
+    private javax.swing.JMenuItem miMaterialUsageReport;
+    private javax.swing.JMenuItem miMaterials;
+    private javax.swing.JMenu miReports;
+    private javax.swing.JMenuItem miSuppliers;
     private javax.swing.JPanel pnlLowStock;
     private javax.swing.JPanel pnlRecentCount;
     private javax.swing.JPanel pnlTotalCleaners;

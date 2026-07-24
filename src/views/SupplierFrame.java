@@ -14,11 +14,72 @@ import javax.swing.JOptionPane;
  */
 public class SupplierFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SupplierFrame
-     */
+    private void applyDarkMode() {
+        getContentPane().setBackground(new java.awt.Color(15, 23, 42));
+        jPanel1.setBackground(new java.awt.Color(30, 41, 59));
+        jLabel1.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel2.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel3.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel4.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel5.setForeground(new java.awt.Color(226, 232, 240));
+        txtSupplierID.setBackground(new java.awt.Color(51, 65, 85));
+        txtSupplierID.setForeground(java.awt.Color.WHITE);
+        txtSupplierName.setBackground(new java.awt.Color(51, 65, 85));
+        txtSupplierName.setForeground(java.awt.Color.WHITE);
+        txtSupplierContactNo.setBackground(new java.awt.Color(51, 65, 85));
+        txtSupplierContactNo.setForeground(java.awt.Color.WHITE);
+        txtSupplierEmail.setBackground(new java.awt.Color(51, 65, 85));
+        txtSupplierEmail.setForeground(java.awt.Color.WHITE);
+        txtSupplierCompanyName.setBackground(new java.awt.Color(51, 65, 85));
+        txtSupplierCompanyName.setForeground(java.awt.Color.WHITE);
+        jTable1.setBackground(new java.awt.Color(30, 41, 59));
+        jTable1.setForeground(new java.awt.Color(226, 232, 240));
+        jTable1.setGridColor(new java.awt.Color(51, 65, 85));
+        jTable1.setSelectionBackground(new java.awt.Color(51, 65, 85));
+        jTable1.getTableHeader().setBackground(new java.awt.Color(30, 41, 59));
+        jTable1.getTableHeader().setForeground(new java.awt.Color(148, 163, 184));
+        jScrollPane2.getViewport().setBackground(new java.awt.Color(15, 23, 42));
+        repaint();
+    }
+
+    private void applyLightMode() {
+        getContentPane().setBackground(new java.awt.Color(248, 250, 252));
+        jPanel1.setBackground(new java.awt.Color(241, 245, 249));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel2.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel3.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel4.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel5.setForeground(new java.awt.Color(15, 23, 42));
+        txtSupplierID.setBackground(java.awt.Color.WHITE);
+        txtSupplierID.setForeground(java.awt.Color.BLACK);
+        txtSupplierName.setBackground(java.awt.Color.WHITE);
+        txtSupplierName.setForeground(java.awt.Color.BLACK);
+        txtSupplierContactNo.setBackground(java.awt.Color.WHITE);
+        txtSupplierContactNo.setForeground(java.awt.Color.BLACK);
+        txtSupplierEmail.setBackground(java.awt.Color.WHITE);
+        txtSupplierEmail.setForeground(java.awt.Color.BLACK);
+        txtSupplierCompanyName.setBackground(java.awt.Color.WHITE);
+        txtSupplierCompanyName.setForeground(java.awt.Color.BLACK);
+        jTable1.setBackground(java.awt.Color.WHITE);
+        jTable1.setForeground(new java.awt.Color(15, 23, 42));
+        jTable1.setGridColor(new java.awt.Color(226, 232, 240));
+        jTable1.setSelectionBackground(new java.awt.Color(226, 232, 240));
+        jTable1.getTableHeader().setBackground(new java.awt.Color(241, 245, 249));
+        jTable1.getTableHeader().setForeground(new java.awt.Color(100, 116, 139));
+        jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
+        repaint();
+    }
+
     public SupplierFrame() {
         initComponents();
+        setLocationRelativeTo(null);
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
     }
 
     /**
@@ -51,12 +112,11 @@ public class SupplierFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnClearSupplier = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnToggleTheme = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
-
-        jTextPane2.setBackground(new java.awt.Color(0, 153, 153));
         jTextPane2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jTextPane2.setText("Supplier Management");
         jScrollPane1.setViewportView(jTextPane2);
@@ -134,51 +194,68 @@ public class SupplierFrame extends javax.swing.JFrame {
             }
         });
 
+        btnBack.setText("Back to Dashboard");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnToggleTheme.setText("☀ Light");
+        btnToggleTheme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToggleThemeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addComponent(btnClearSupplier)
-                .addGap(43, 43, 43)
-                .addComponent(btnAddSupplier)
-                .addGap(45, 45, 45)
-                .addComponent(btnViewSupplier)
-                .addGap(42, 42, 42)
-                .addComponent(btnUpdateSupplier)
-                .addGap(40, 40, 40)
-                .addComponent(btnDeleteSupplier)
-                .addGap(20, 20, 20))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(txtSupplierID, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnToggleTheme)
+                .addGap(19, 19, 19))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSupplierName, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSupplierEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtSupplierCompanyName, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                                    .addComponent(txtSupplierContactNo)))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSupplierName, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(txtSupplierID, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(381, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSupplierEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtSupplierCompanyName, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                            .addComponent(txtSupplierContactNo))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnClearSupplier)
+                .addGap(32, 32, 32)
+                .addComponent(btnAddSupplier)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnViewSupplier)
+                .addGap(39, 39, 39)
+                .addComponent(btnUpdateSupplier)
+                .addGap(30, 30, 30)
+                .addComponent(btnDeleteSupplier)
+                .addGap(38, 38, 38)
+                .addComponent(btnBack)
+                .addGap(16, 16, 16))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(25, 25, 25)
@@ -190,7 +267,9 @@ public class SupplierFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSupplierID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSupplierID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnToggleTheme))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
@@ -212,13 +291,14 @@ public class SupplierFrame extends javax.swing.JFrame {
                     .addComponent(txtSupplierEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnViewSupplier)
                     .addComponent(btnDeleteSupplier)
                     .addComponent(btnUpdateSupplier)
                     .addComponent(btnAddSupplier)
-                    .addComponent(btnClearSupplier))
+                    .addComponent(btnClearSupplier)
+                    .addComponent(btnBack))
                 .addGap(48, 48, 48))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -391,6 +471,23 @@ public class SupplierFrame extends javax.swing.JFrame {
     private void btnClearSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSupplierActionPerformed
         clearSupplierFields();
     }//GEN-LAST:event_btnClearSupplierActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        DashboardForm dashboardForm = new DashboardForm();
+        dashboardForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnToggleThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleThemeActionPerformed
+        util.ThemeManager.isDarkMode = !util.ThemeManager.isDarkMode;
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
+    }//GEN-LAST:event_btnToggleThemeActionPerformed
     private void clearSupplierFields() {
     txtSupplierID.setText("");
     txtSupplierName.setText("");
@@ -436,8 +533,10 @@ public class SupplierFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSupplier;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnClearSupplier;
     private javax.swing.JButton btnDeleteSupplier;
+    private javax.swing.JButton btnToggleTheme;
     private javax.swing.JButton btnUpdateSupplier;
     private javax.swing.JButton btnViewSupplier;
     private javax.swing.JLabel jLabel1;

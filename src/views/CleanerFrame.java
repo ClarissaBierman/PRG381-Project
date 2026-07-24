@@ -13,11 +13,72 @@ import javax.swing.JOptionPane;
  */
 public class CleanerFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CleanerFrame
-     */
+    private void applyDarkMode() {
+        getContentPane().setBackground(new java.awt.Color(15, 23, 42));
+        jPanel1.setBackground(new java.awt.Color(30, 41, 59));
+        jLabel1.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel2.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel3.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel4.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel5.setForeground(new java.awt.Color(226, 232, 240));
+        txtCleanerID.setBackground(new java.awt.Color(51, 65, 85));
+        txtCleanerID.setForeground(java.awt.Color.WHITE);
+        txtCleanerName.setBackground(new java.awt.Color(51, 65, 85));
+        txtCleanerName.setForeground(java.awt.Color.WHITE);
+        txtCleanerContactNumber.setBackground(new java.awt.Color(51, 65, 85));
+        txtCleanerContactNumber.setForeground(java.awt.Color.WHITE);
+        txtCleanerEmail.setBackground(new java.awt.Color(51, 65, 85));
+        txtCleanerEmail.setForeground(java.awt.Color.WHITE);
+        txtCleanerCompanyName1.setBackground(new java.awt.Color(51, 65, 85));
+        txtCleanerCompanyName1.setForeground(java.awt.Color.WHITE);
+        jTable1.setBackground(new java.awt.Color(30, 41, 59));
+        jTable1.setForeground(new java.awt.Color(226, 232, 240));
+        jTable1.setGridColor(new java.awt.Color(51, 65, 85));
+        jTable1.setSelectionBackground(new java.awt.Color(51, 65, 85));
+        jTable1.getTableHeader().setBackground(new java.awt.Color(30, 41, 59));
+        jTable1.getTableHeader().setForeground(new java.awt.Color(148, 163, 184));
+        jScrollPane2.getViewport().setBackground(new java.awt.Color(15, 23, 42));
+        repaint();
+    }
+
+    private void applyLightMode() {
+        getContentPane().setBackground(new java.awt.Color(248, 250, 252));
+        jPanel1.setBackground(new java.awt.Color(241, 245, 249));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel2.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel3.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel4.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel5.setForeground(new java.awt.Color(15, 23, 42));
+        txtCleanerID.setBackground(java.awt.Color.WHITE);
+        txtCleanerID.setForeground(java.awt.Color.BLACK);
+        txtCleanerName.setBackground(java.awt.Color.WHITE);
+        txtCleanerName.setForeground(java.awt.Color.BLACK);
+        txtCleanerContactNumber.setBackground(java.awt.Color.WHITE);
+        txtCleanerContactNumber.setForeground(java.awt.Color.BLACK);
+        txtCleanerEmail.setBackground(java.awt.Color.WHITE);
+        txtCleanerEmail.setForeground(java.awt.Color.BLACK);
+        txtCleanerCompanyName1.setBackground(java.awt.Color.WHITE);
+        txtCleanerCompanyName1.setForeground(java.awt.Color.BLACK);
+        jTable1.setBackground(java.awt.Color.WHITE);
+        jTable1.setForeground(new java.awt.Color(15, 23, 42));
+        jTable1.setGridColor(new java.awt.Color(226, 232, 240));
+        jTable1.setSelectionBackground(new java.awt.Color(226, 232, 240));
+        jTable1.getTableHeader().setBackground(new java.awt.Color(241, 245, 249));
+        jTable1.getTableHeader().setForeground(new java.awt.Color(100, 116, 139));
+        jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
+        repaint();
+    }
+
     public CleanerFrame() {
         initComponents();
+        setLocationRelativeTo(null);
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
     }
 
     /**
@@ -49,12 +110,13 @@ public class CleanerFrame extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         btnAddCleaner = new javax.swing.JButton();
         btnClearCleaners = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnToggleTheme = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextArea1.setBackground(new java.awt.Color(51, 255, 255));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jTextArea1.setRows(5);
@@ -132,6 +194,20 @@ public class CleanerFrame extends javax.swing.JFrame {
             }
         });
 
+        btnBack.setText("Back to Dashboard");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnToggleTheme.setText("☀ Light");
+        btnToggleTheme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToggleThemeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -140,42 +216,52 @@ public class CleanerFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCleanerContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCleanerContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCleanerName, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtCleanerCompanyName1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCleanerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(81, 81, 81)
+                                        .addComponent(txtCleanerID, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCleanerName, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCleanerCompanyName1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCleanerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(133, 133, 133)
-                                .addComponent(btnViewCleaner)
-                                .addGap(36, 36, 36)
-                                .addComponent(btnUpdateCleaner)
-                                .addGap(46, 46, 46)
-                                .addComponent(btnDeleteCleaner)
-                                .addGap(41, 41, 41)
-                                .addComponent(btnClearCleaners))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(txtCleanerID, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAddCleaner)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(118, 118, 118)
+                                        .addComponent(btnViewCleaner)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(btnUpdateCleaner)
+                                        .addGap(46, 46, 46)
+                                        .addComponent(btnDeleteCleaner)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(btnClearCleaners))
+                                    .addComponent(btnAddCleaner))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBack)))
+                        .addGap(0, 13, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnToggleTheme)))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(26, 26, 26)
@@ -186,7 +272,9 @@ public class CleanerFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnToggleTheme)
+                .addGap(12, 12, 12)
                 .addComponent(txtCleanerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -212,7 +300,8 @@ public class CleanerFrame extends javax.swing.JFrame {
                     .addComponent(btnUpdateCleaner)
                     .addComponent(btnDeleteCleaner)
                     .addComponent(btnAddCleaner)
-                    .addComponent(btnClearCleaners))
+                    .addComponent(btnClearCleaners)
+                    .addComponent(btnBack))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -368,6 +457,23 @@ public class CleanerFrame extends javax.swing.JFrame {
     private void btnClearCleanersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearCleanersActionPerformed
        clearFields();
     }//GEN-LAST:event_btnClearCleanersActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        DashboardForm dashboardForm = new DashboardForm();
+        dashboardForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnToggleThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleThemeActionPerformed
+        util.ThemeManager.isDarkMode = !util.ThemeManager.isDarkMode;
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
+    }//GEN-LAST:event_btnToggleThemeActionPerformed
     private void clearFields() {
     txtCleanerID.setText("");
     txtCleanerName.setText("");
@@ -413,8 +519,10 @@ public class CleanerFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCleaner;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnClearCleaners;
     private javax.swing.JButton btnDeleteCleaner;
+    private javax.swing.JButton btnToggleTheme;
     private javax.swing.JButton btnUpdateCleaner;
     private javax.swing.JButton btnViewCleaner;
     private javax.swing.JLabel jLabel1;

@@ -1,12 +1,12 @@
 package prg381;
-import views.DashboardForm;
+import views.LoginForm;
 
 public class PRG381Project {
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardForm().setVisible(true);
+                new LoginForm().setVisible(true);
             }
         });
     }

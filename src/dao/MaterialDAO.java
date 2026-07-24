@@ -21,60 +21,59 @@ public class MaterialDAO {
 
     public List<Material> getAllMaterials() throws SQLException {
         List<Material> materials = new ArrayList<>();
-        String sql = "SELECT MaterialID, Name, Quantity, Reorder FROM material";
- 
+        String sql = "SELECT material_id, material_name, quantity, reorder_level FROM materials";
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
- 
+
             while (rs.next()) {
-                materials.add(new Material(
-                        rs.getString("MaterialID"),
-                        rs.getString("Name"),
-                        rs.getString("Quantity"),
-                        rs.getString("Reorder")
-                ));
+                Material material = new Material();
+                material.setMaterialId(rs.getInt("material_id"));
+                material.setMaterialName(rs.getString("material_name"));
+                material.setQuantity(rs.getInt("quantity"));
+                material.setReorderLevel(rs.getInt("reorder_level"));
+                materials.add(material);
             }
         }
         return materials;
     }
- 
+
     public boolean addMaterial(Material material) throws SQLException {
-        String sql = "INSERT INTO material (MaterialID, Name, Quantity, Reorder) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO materials (material_id, material_name, quantity, reorder_level) VALUES (?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
- 
-            stmt.setString(1, material.getMaterialId());
-            stmt.setString(2, material.getName());
-            stmt.setString(3, material.getQuantity());
-            stmt.setString(4, material.getReorder());
- 
+
+            stmt.setInt(1, material.getMaterialId());
+            stmt.setString(2, material.getMaterialName());
+            stmt.setInt(3, material.getQuantity());
+            stmt.setInt(4, material.getReorderLevel());
+
             return stmt.executeUpdate() == 1;
         }
     }
- 
+
     public boolean updateMaterial(Material material) throws SQLException {
-        String sql = "UPDATE material SET Name = ?, Quantity = ?, Reorder = ? WHERE MaterialID = ?";
+        String sql = "UPDATE materials SET material_name = ?, quantity = ?, reorder_level = ? WHERE material_id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
- 
-            stmt.setString(1, material.getName());
-            stmt.setString(2, material.getQuantity());
-            stmt.setString(3, material.getReorder());
-            stmt.setString(4, material.getMaterialId());
- 
+
+            stmt.setString(1, material.getMaterialName());
+            stmt.setInt(2, material.getQuantity());
+            stmt.setInt(3, material.getReorderLevel());
+            stmt.setInt(4, material.getMaterialId());
+
             return stmt.executeUpdate() == 1;
         }
     }
- 
+
     public boolean deleteMaterial(String materialId) throws SQLException {
-        String sql = "DELETE FROM material WHERE MaterialID = ?";
+        String sql = "DELETE FROM materials WHERE material_id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
- 
-            stmt.setString(1, materialId);
+
+            stmt.setInt(1, Integer.parseInt(materialId));
             return stmt.executeUpdate() == 1;
         }
     }
 }
-

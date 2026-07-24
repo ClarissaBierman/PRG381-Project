@@ -14,11 +14,70 @@ public class RegistrationForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistrationForm.class.getName());
 
-    /**
-     * Creates new form RegistrationForm
-     */
+    private void applyDarkMode() {
+        getContentPane().setBackground(new java.awt.Color(15, 23, 42));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel4.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel6.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel7.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel8.setForeground(new java.awt.Color(226, 232, 240));
+        lblRLogin.setForeground(new java.awt.Color(148, 163, 184));
+        txtRFName.setBackground(new java.awt.Color(30, 41, 59));
+        txtRFName.setForeground(java.awt.Color.WHITE);
+        txtRFName.setCaretColor(java.awt.Color.WHITE);
+        txtRLName.setBackground(new java.awt.Color(30, 41, 59));
+        txtRLName.setForeground(java.awt.Color.WHITE);
+        txtRLName.setCaretColor(java.awt.Color.WHITE);
+        txtREmail.setBackground(new java.awt.Color(30, 41, 59));
+        txtREmail.setForeground(java.awt.Color.WHITE);
+        txtREmail.setCaretColor(java.awt.Color.WHITE);
+        ptxtRPassword.setBackground(new java.awt.Color(30, 41, 59));
+        ptxtRPassword.setForeground(java.awt.Color.WHITE);
+        ptxtRPassword.setCaretColor(java.awt.Color.WHITE);
+        ptxtRCPassword.setBackground(new java.awt.Color(30, 41, 59));
+        ptxtRCPassword.setForeground(java.awt.Color.WHITE);
+        ptxtRCPassword.setCaretColor(java.awt.Color.WHITE);
+        repaint();
+    }
+
+    private void applyLightMode() {
+        getContentPane().setBackground(new java.awt.Color(248, 250, 252));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel3.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel4.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel6.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel7.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel8.setForeground(new java.awt.Color(15, 23, 42));
+        lblRLogin.setForeground(new java.awt.Color(100, 116, 139));
+        txtRFName.setBackground(java.awt.Color.WHITE);
+        txtRFName.setForeground(java.awt.Color.BLACK);
+        txtRFName.setCaretColor(java.awt.Color.BLACK);
+        txtRLName.setBackground(java.awt.Color.WHITE);
+        txtRLName.setForeground(java.awt.Color.BLACK);
+        txtRLName.setCaretColor(java.awt.Color.BLACK);
+        txtREmail.setBackground(java.awt.Color.WHITE);
+        txtREmail.setForeground(java.awt.Color.BLACK);
+        txtREmail.setCaretColor(java.awt.Color.BLACK);
+        ptxtRPassword.setBackground(java.awt.Color.WHITE);
+        ptxtRPassword.setForeground(java.awt.Color.BLACK);
+        ptxtRPassword.setCaretColor(java.awt.Color.BLACK);
+        ptxtRCPassword.setBackground(java.awt.Color.WHITE);
+        ptxtRCPassword.setForeground(java.awt.Color.BLACK);
+        ptxtRCPassword.setCaretColor(java.awt.Color.BLACK);
+        repaint();
+    }
+
     public RegistrationForm() {
         initComponents();
+        setLocationRelativeTo(null);
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
     }
 
     /**
@@ -44,9 +103,11 @@ public class RegistrationForm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btnToggleTheme = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Registration");
 
         txtRFName.addActionListener(this::txtRFNameActionPerformed);
@@ -74,6 +135,9 @@ public class RegistrationForm extends javax.swing.JFrame {
 
         jLabel8.setText("Confirm Password");
 
+        btnToggleTheme.setText("☀ Light");
+        btnToggleTheme.addActionListener(this::btnToggleThemeActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,7 +157,7 @@ public class RegistrationForm extends javax.swing.JFrame {
                     .addComponent(txtREmail, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ptxtRPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ptxtRCPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +166,9 @@ public class RegistrationForm extends javax.swing.JFrame {
                         .addGap(170, 170, 170))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(249, 249, 249))
+                        .addGap(118, 118, 118)
+                        .addComponent(btnToggleTheme)
+                        .addGap(59, 59, 59))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnRReturn)
@@ -112,8 +178,13 @@ public class RegistrationForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(btnToggleTheme)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,9 +209,9 @@ public class RegistrationForm extends javax.swing.JFrame {
                 .addComponent(lblRLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRRegister)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRReturn)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,7 +224,7 @@ public class RegistrationForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRFNameActionPerformed
 
     private void btnRReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRReturnActionPerformed
-        // TODO add your handling code here:
+        registrationController.goToLogin(this);
     }//GEN-LAST:event_btnRReturnActionPerformed
 
     private void btnRRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRRegisterActionPerformed
@@ -172,6 +243,17 @@ public class RegistrationForm extends javax.swing.JFrame {
     private void lblRLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRLoginMouseClicked
         registrationController.goToLogin(this);
     }//GEN-LAST:event_lblRLoginMouseClicked
+
+    private void btnToggleThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleThemeActionPerformed
+        util.ThemeManager.isDarkMode = !util.ThemeManager.isDarkMode;
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
+    }//GEN-LAST:event_btnToggleThemeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,6 +283,7 @@ public class RegistrationForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRRegister;
     private javax.swing.JButton btnRReturn;
+    private javax.swing.JButton btnToggleTheme;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

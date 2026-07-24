@@ -2,50 +2,50 @@ package models;
 
 public class Material {
  
-    private String materialId;
-    private String name;
-    private String quantity;
-    private String reorder;
+    private int materialId;
+    private String materialName;
+    private int quantity;
+    private int reorderLevel;
  
     public Material() {
     }
  
-    public Material(String materialId, String name, String quantity, String reorder) {
-        this.materialId = materialId;
-        this.name = name;
-        this.quantity = quantity;
-        this.reorder = reorder;
+    public Material(String materialId, String materialName, String quantity, String reorderLevel) {
+        this.materialId = Integer.parseInt(materialId);
+        this.materialName = materialName;
+        this.quantity = Integer.parseInt(quantity);
+        this.reorderLevel = Integer.parseInt(reorderLevel);
     }
  
-    public String getMaterialId() {
+   public int getMaterialId() {
         return materialId;
     }
- 
-    public void setMaterialId(String materialId) {
+
+    public void setMaterialId(int materialId) {
         this.materialId = materialId;
     }
  
-    public String getName() {
-        return name;
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
     }
  
-    public void setName(String name) {
-        this.name = name;
-    }
- 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
- 
-    public void setQuantity(String quantity) {
+
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
  
-    public String getReorder() {
-        return reorder;
+    public int getReorderLevel() {
+        return reorderLevel;
     }
- 
-    public void setReorder(String reorder) {
-        this.reorder = reorder;
+
+    public void setReorderLevel(int reorderLevel) {
+        this.reorderLevel = reorderLevel;
     }
 }

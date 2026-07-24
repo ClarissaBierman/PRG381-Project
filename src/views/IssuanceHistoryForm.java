@@ -7,9 +7,43 @@ import javax.swing.table.DefaultTableModel;
 public class IssuanceHistoryForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(IssuanceHistoryForm.class.getName());
+    
+    private void applyDarkMode() {
+        getContentPane().setBackground(new java.awt.Color(15, 23, 42));
+        lblStatus.setForeground(new java.awt.Color(226, 232, 240));
+        tblIssuanceHistory.setBackground(new java.awt.Color(30, 41, 59));
+        tblIssuanceHistory.setForeground(new java.awt.Color(226, 232, 240));
+        tblIssuanceHistory.setGridColor(new java.awt.Color(51, 65, 85));
+        tblIssuanceHistory.setSelectionBackground(new java.awt.Color(51, 65, 85));
+        tblIssuanceHistory.getTableHeader().setBackground(new java.awt.Color(30, 41, 59));
+        tblIssuanceHistory.getTableHeader().setForeground(new java.awt.Color(148, 163, 184));
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 23, 42));
+        repaint();
+    }
+
+    private void applyLightMode() {
+        getContentPane().setBackground(new java.awt.Color(248, 250, 252));
+        lblStatus.setForeground(new java.awt.Color(15, 23, 42));
+        tblIssuanceHistory.setBackground(java.awt.Color.WHITE);
+        tblIssuanceHistory.setForeground(new java.awt.Color(15, 23, 42));
+        tblIssuanceHistory.setGridColor(new java.awt.Color(226, 232, 240));
+        tblIssuanceHistory.setSelectionBackground(new java.awt.Color(226, 232, 240));
+        tblIssuanceHistory.getTableHeader().setBackground(new java.awt.Color(241, 245, 249));
+        tblIssuanceHistory.getTableHeader().setForeground(new java.awt.Color(100, 116, 139));
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+        repaint();
+    }
 
     public IssuanceHistoryForm() {
         initComponents();
+        setLocationRelativeTo(null);
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
         
         setLocationRelativeTo(null);
         setTitle("Issuance History Report");
@@ -79,8 +113,10 @@ public class IssuanceHistoryForm extends javax.swing.JFrame {
         tblIssuanceHistory = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        btnToggleTheme = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblIssuanceHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,35 +133,66 @@ public class IssuanceHistoryForm extends javax.swing.JFrame {
 
         btnRefresh.setText("Refresh");
 
+        btnBack.setText("Back to Dashboard");
+        btnBack.addActionListener(this::btnBackActionPerformed);
+
+        btnToggleTheme.setText("☀ Light");
+        btnToggleTheme.addActionListener(this::btnToggleThemeActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(btnRefresh)
                         .addGap(18, 18, 18)
-                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBack))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnToggleTheme)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addContainerGap()
+                .addComponent(btnToggleTheme)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRefresh)
-                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRefresh)
+                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBack))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        DashboardForm dashboardForm = new DashboardForm();
+        dashboardForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnToggleThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleThemeActionPerformed
+        util.ThemeManager.isDarkMode = !util.ThemeManager.isDarkMode;
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
+    }//GEN-LAST:event_btnToggleThemeActionPerformed
 
    
     public static void main(String args[]) {
@@ -151,7 +218,9 @@ public class IssuanceHistoryForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnToggleTheme;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JTable tblIssuanceHistory;
