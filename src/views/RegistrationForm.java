@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
-
+import Controller.RegistrationController;
+import util.DBConnection;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Paul
@@ -50,10 +52,17 @@ public class RegistrationForm extends javax.swing.JFrame {
         txtRFName.addActionListener(this::txtRFNameActionPerformed);
 
         btnRRegister.setText("Register");
+        btnRRegister.addActionListener(this::btnRRegisterActionPerformed);
 
         btnRReturn.setText("Cancel");
+        btnRReturn.addActionListener(this::btnRReturnActionPerformed);
 
         lblRLogin.setText("If you are already registered click here.");
+        lblRLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRLoginMouseClicked(evt);
+            }
+        });
 
         jLabel3.setText("Firstname");
 
@@ -137,9 +146,32 @@ public class RegistrationForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private final RegistrationController registrationController = new RegistrationController();
+    
     private void txtRFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRFNameActionPerformed
+
+    private void btnRReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRReturnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRReturnActionPerformed
+
+    private void btnRRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRRegisterActionPerformed
+        String error = registrationController.register(
+        txtRFName.getText(), txtRLName.getText(), txtREmail.getText(),
+        new String(ptxtRPassword.getPassword()), new String(ptxtRCPassword.getPassword()));
+        if (error == null) {
+            JOptionPane.showMessageDialog(this, "Registration successful!");
+            registrationController.goToLogin(this);
+        } 
+        else {
+            JOptionPane.showMessageDialog(this, error, "Registration Failed", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRRegisterActionPerformed
+
+    private void lblRLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRLoginMouseClicked
+        registrationController.goToLogin(this);
+    }//GEN-LAST:event_lblRLoginMouseClicked
 
     /**
      * @param args the command line arguments

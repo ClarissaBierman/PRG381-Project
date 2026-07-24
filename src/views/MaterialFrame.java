@@ -6,7 +6,8 @@ package views;
 
 import util.DBConnection;
 import javax.swing.JOptionPane;
-
+import javax.swing.table.DefaultTableModel;
+import Controller.MaterialController;
 /**
  *
  * @author Paul
@@ -20,8 +21,9 @@ public class MaterialFrame extends javax.swing.JFrame {
      */
     public MaterialFrame() {
         initComponents();
+        materialController.loadMaterials(tableModel);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -188,126 +190,26 @@ public class MaterialFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private final MaterialController materialController = new MaterialController();
+    private DefaultTableModel tableModel;
+    
     private void btnMAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMAddActionPerformed
-        String id = txtMMatID.getText().trim();
-        String name = txtMMatName.getText().trim();
-        String quantity = txtMMatQuantity.getText().trim();
-        String reorder = txtMMatReorder.getText().trim();
-        // Check empty fields
-        if(id.isEmpty() | name.isEmpty() | quantity.isEmpty() | reorder.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in the required fields.");
-        return;
-        }
-        //Check invalid inputs in number fields
-        if(!id.matches("\\d+")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Material ID must contain numbers only.");
-        return;
-        }
-        if(!quantity.matches("\\d+")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Material quantity must contain numbers only.");
-        return;
-        }
-        if(!reorder.matches("\\d+")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Material reorder must contain numbers only.");
-        return;
-        }
-        //Check invalid input in text only fields
-        if (!name.matches("[a-zA-Z\\s.]+")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Cleaner Name cannot contain numbers.");
-        return;
-        }
-        else{
-            javax.swing.JOptionPane.showMessageDialog(this,"Data added Succesfully!");
-            // Add data to Table
-            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblMaterial.getModel();
-            model.addRow(new Object[]{id, name, quantity, reorder});
-        }
+        String error = materialController.addMaterial(txtMMatID.getText(), txtMMatName.getText(),
+        txtMMatQuantity.getText(), txtMMatReorder.getText());
     }//GEN-LAST:event_btnMAddActionPerformed
 
     private void btnMViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMViewActionPerformed
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblMaterial.getModel();
-        int rowCount = model.getRowCount();
-    
-        // Check if the table is empty
-        if (rowCount == 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "No supplier records found in the table.");
-            return;
-        }
-    
-        // Create a list model to store formatted text lines
-        javax.swing.DefaultListModel<String> listModel = new javax.swing.DefaultListModel<>();
-    
-        // Loop through table rows and format the data for the list view
-        for (int i = 0; i < rowCount; i++) {
-            String id = model.getValueAt(i, 0).toString();
-            String name = model.getValueAt(i, 1).toString();
-            String quantity = model.getValueAt(i, 2).toString();
-            String reorder = model.getValueAt(i,3).toString();
-            listModel.addElement(String.format("ID: %s | Name: %s | Quantity: %s| Reorder:%s", id, name, quantity, reorder));
-        }
-    
-        // Wrap the list in a scrollable panel
-        javax.swing.JList<String> materialList = new javax.swing.JList<>(listModel);
-        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(materialList);
-        scrollPane.setPreferredSize(new java.awt.Dimension(400, 200));
-    
-        // Display the pop-up list view
-        javax.swing.JOptionPane.showMessageDialog(this, scrollPane, "Current Materail List", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        String error = materialController.loadMaterials(tableModel);
     }//GEN-LAST:event_btnMViewActionPerformed
 
     private void btnMUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMUpdateActionPerformed
-    javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblMaterial.getModel();
-    int selectedRow = tblMaterial.getSelectedRow();
-    if (selectedRow < 0) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please select a row from the table to update.");
-        return;
-    }
-        String id = txtMMatID.getText().trim();
-        String name = txtMMatName.getText().trim();
-        String quantity = txtMMatQuantity.getText().trim();
-        String reorder = txtMMatReorder.getText().trim();
-        // Check empty fields
-        if(id.isEmpty() | name.isEmpty() | quantity.isEmpty() | reorder.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in the required fields.");
-        return;
-        }
-        //Check invalid inputs in number fields
-        if(!id.matches("\\d+")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Material ID must contain numbers only.");
-        return;
-        }
-        if(!quantity.matches("\\d+")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Material quantity must contain numbers only.");
-        return;
-        }
-        if(!reorder.matches("\\d+")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Material reorder must contain numbers only.");
-        return;
-        }
-        //Check invalid input in text only fields
-        if (!name.matches("[a-zA-Z\\s.]+")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Cleaner Name cannot contain numbers.");
-        return;
-        }
-        else{
-            javax.swing.JOptionPane.showMessageDialog(this,"Data updated Succesfully!");
-            model.setValueAt(id, selectedRow, 0);
-            model.setValueAt(name, selectedRow, 1);
-            model.setValueAt(quantity, selectedRow, 2);
-            model.setValueAt(reorder, selectedRow, 3);
-        }
+        String error = materialController.updateMaterial(txtMMatID.getText(), txtMMatName.getText(),
+        txtMMatQuantity.getText(), txtMMatReorder.getText());
+
     }//GEN-LAST:event_btnMUpdateActionPerformed
 
     private void btnMDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMDeleteActionPerformed
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblMaterial.getModel();
-        int selectedRow = tblMaterial.getSelectedRow();
-    
-        if (selectedRow >= 0) {
-            model.removeRow(selectedRow);
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please select a row to delete.");
-        }
+        String error = materialController.deleteMaterial(txtMMatID.getText());
     }//GEN-LAST:event_btnMDeleteActionPerformed
 
     private void btnMReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMReturnActionPerformed
@@ -315,12 +217,13 @@ public class MaterialFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMReturnActionPerformed
 
     private void tblMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMaterialMouseClicked
-    javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblMaterial.getModel();
-    int selectedRow = tblMaterial.getSelectedRow();
-        txtMMatID.setText(model.getValueAt(selectedRow, 0).toString());
-        txtMMatName.setText(model.getValueAt(selectedRow, 1).toString());
-        txtMMatQuantity.setText(model.getValueAt(selectedRow, 2).toString());
-        txtMMatReorder.setText(model.getValueAt(selectedRow, 3).toString());
+        int row = tblMaterial.getSelectedRow();
+        if (row != -1) {
+            txtMMatID.setText(tblMaterial.getValueAt(row, 0).toString());
+            txtMMatName.setText(tblMaterial.getValueAt(row, 1).toString());
+            txtMMatQuantity.setText(tblMaterial.getValueAt(row, 2).toString());
+            txtMMatReorder.setText(tblMaterial.getValueAt(row, 3).toString());
+        }
     }//GEN-LAST:event_tblMaterialMouseClicked
     
     /**

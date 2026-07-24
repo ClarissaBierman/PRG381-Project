@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
-
+import util.DBConnection;
+import javax.swing.JOptionPane;
+import Controller.LoginController;
 /**
  *
  * @author Paul
@@ -35,7 +37,7 @@ public class LoginForm extends javax.swing.JFrame {
         btnLReturn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblRegister = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +46,7 @@ public class LoginForm extends javax.swing.JFrame {
         txtLEmail.addActionListener(this::txtLEmailActionPerformed);
 
         btnLLogin.setText("Login");
+        btnLLogin.addActionListener(this::btnLLoginActionPerformed);
 
         btnLReturn.setText("Return");
 
@@ -51,7 +54,12 @@ public class LoginForm extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
-        jLabel4.setText("If you aren't registered click here.");
+        lblRegister.setText("If you aren't registered click here.");
+        lblRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegisterMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +87,7 @@ public class LoginForm extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(262, 262, 262))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(lblRegister)
                         .addGap(196, 196, 196))))
         );
         layout.setVerticalGroup(
@@ -96,7 +104,7 @@ public class LoginForm extends javax.swing.JFrame {
                     .addComponent(ptxtLPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(lblRegister)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -106,10 +114,25 @@ public class LoginForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private final LoginController loginController = new LoginController();
+    
     private void txtLEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLEmailActionPerformed
+
+    private void btnLLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLLoginActionPerformed
+        String error = loginController.login(txtLEmail.getText(), new String(ptxtLPassword.getPassword()));
+        if (error == null) {
+            JOptionPane.showMessageDialog(this, "Login successful");
+        } 
+        else {
+            JOptionPane.showMessageDialog(this, error, "Login Failed", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnLLoginActionPerformed
+
+    private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
+        loginController.goToRegistration(this);
+    }//GEN-LAST:event_lblRegisterMouseClicked
 
     /**
      * @param args the command line arguments
@@ -142,7 +165,7 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblRegister;
     private javax.swing.JPasswordField ptxtLPassword;
     private javax.swing.JTextField txtLEmail;
     // End of variables declaration//GEN-END:variables
