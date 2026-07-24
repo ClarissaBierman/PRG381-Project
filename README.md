@@ -7,7 +7,7 @@ Steps to get this program working:
 1. Once the program is installed to your device, download and connect the latest PostgreSQL Driver to the program.
 2. Make a clean build of this program to decrease the chance of any random errors occuring.
 3. Create a PostgreSQL Database with these 5 tables: Users, Materials, Suppliers, Cleaners, Stock Issuance.
-4. In Users the fields needed are: UserID (int, auto-generated), Firstname (string), Lastname (string), Email (string), Password (string), Role (string — "Storekeeper" or "Supervisor").
+4. In Users the fields needed are: UserID (int, auto-generated), Firstname (string), Lastname (string), Email (string), Password (string), Role (string - "Storekeeper" or "Supervisor").
 5. In Materials the fields needed are: MaterialID (int, auto-generated), Name (string), Quantity (int) and Reorder Level (int).
 6. In Suppliers the fields needed are: SupplierID (int, auto-generated), Name (string), Company Name (string), Contact Number (int), Email (string).
 7. In Cleaners the fields needed are: CleanerID (int, auto-generated), Name (string), Company Name (string), Contact Number (int), Email (string).
@@ -21,7 +21,7 @@ Steps to get this program working:
 - last_name (varchar)
 - email (varchar, unique)
 - password (varchar)
-- role (varchar — "Storekeeper" or "Supervisor")
+- role (varchar - "Storekeeper" or "Supervisor")
 
 **materials**
 - material_id (SERIAL, primary key)
@@ -53,7 +53,7 @@ Steps to get this program working:
 ## Features implemented
 
 - Login, Registration, and Logout
-- Role-based access (Storekeeper / Supervisor) — Supervisor-only permissions on 
+- Role-based access (Storekeeper / Supervisor) - Supervisor-only permissions on 
   higher-risk actions (e.g. deleting materials)
 - Dashboard with live counts: total materials, low-stock items, total cleaners, 
   recent stock issuances
@@ -73,6 +73,9 @@ Steps to get this program working:
 - Validation (required fields, duplicate email checks, numeric checks, negative stock 
   prevention) is handled per-module directly in the Controller classes rather than one 
   shared validator, to keep each module's logic self-contained.
+
+## Group Changes
+This project was originally assigned to a group of 5. Christiaan Geyer left the  university earlier in the year, before the project began, and was therefore unable to contribute to any of the work. The remaining group members redistributed the outstanding modules between them.
 
  ## Github Repository
   https://github.com/ClarissaBierman/PRG381-Project
