@@ -16,11 +16,75 @@ public class MaterialFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MaterialFrame.class.getName());
 
-    /**
-     * Creates new form MaterialFrame
-     */
+    private void applyDarkMode() {
+        getContentPane().setBackground(new java.awt.Color(15, 23, 42));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel3.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel4.setForeground(new java.awt.Color(226, 232, 240));
+        jLabel5.setForeground(new java.awt.Color(226, 232, 240));
+        txtMMatID.setBackground(new java.awt.Color(30, 41, 59));
+        txtMMatID.setForeground(java.awt.Color.WHITE);
+        txtMMatID.setCaretColor(java.awt.Color.WHITE);
+        txtMMatName.setBackground(new java.awt.Color(30, 41, 59));
+        txtMMatName.setForeground(java.awt.Color.WHITE);
+        txtMMatName.setCaretColor(java.awt.Color.WHITE);
+        txtMMatQuantity.setBackground(new java.awt.Color(30, 41, 59));
+        txtMMatQuantity.setForeground(java.awt.Color.WHITE);
+        txtMMatQuantity.setCaretColor(java.awt.Color.WHITE);
+        txtMMatReorder.setBackground(new java.awt.Color(30, 41, 59));
+        txtMMatReorder.setForeground(java.awt.Color.WHITE);
+        txtMMatReorder.setCaretColor(java.awt.Color.WHITE);
+        tblMaterial.setBackground(new java.awt.Color(30, 41, 59));
+        tblMaterial.setForeground(new java.awt.Color(226, 232, 240));
+        tblMaterial.setGridColor(new java.awt.Color(51, 65, 85));
+        tblMaterial.setSelectionBackground(new java.awt.Color(51, 65, 85));
+        tblMaterial.getTableHeader().setBackground(new java.awt.Color(30, 41, 59));
+        tblMaterial.getTableHeader().setForeground(new java.awt.Color(148, 163, 184));
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 23, 42));
+        repaint();
+    }
+
+    private void applyLightMode() {
+        getContentPane().setBackground(new java.awt.Color(248, 250, 252));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel2.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel3.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel4.setForeground(new java.awt.Color(15, 23, 42));
+        jLabel5.setForeground(new java.awt.Color(15, 23, 42));
+        txtMMatID.setBackground(java.awt.Color.WHITE);
+        txtMMatID.setForeground(java.awt.Color.BLACK);
+        txtMMatID.setCaretColor(java.awt.Color.BLACK);
+        txtMMatName.setBackground(java.awt.Color.WHITE);
+        txtMMatName.setForeground(java.awt.Color.BLACK);
+        txtMMatName.setCaretColor(java.awt.Color.BLACK);
+        txtMMatQuantity.setBackground(java.awt.Color.WHITE);
+        txtMMatQuantity.setForeground(java.awt.Color.BLACK);
+        txtMMatQuantity.setCaretColor(java.awt.Color.BLACK);
+        txtMMatReorder.setBackground(java.awt.Color.WHITE);
+        txtMMatReorder.setForeground(java.awt.Color.BLACK);
+        txtMMatReorder.setCaretColor(java.awt.Color.BLACK);
+        tblMaterial.setBackground(java.awt.Color.WHITE);
+        tblMaterial.setForeground(new java.awt.Color(15, 23, 42));
+        tblMaterial.setGridColor(new java.awt.Color(226, 232, 240));
+        tblMaterial.setSelectionBackground(new java.awt.Color(226, 232, 240));
+        tblMaterial.getTableHeader().setBackground(new java.awt.Color(241, 245, 249));
+        tblMaterial.getTableHeader().setForeground(new java.awt.Color(100, 116, 139));
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+        repaint();
+    }
+
     public MaterialFrame() {
         initComponents();
+        setLocationRelativeTo(null);
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
+        tableModel = (DefaultTableModel) tblMaterial.getModel();
         materialController.loadMaterials(tableModel);
     }
     
@@ -49,9 +113,11 @@ public class MaterialFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btnToggleTheme = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Materials");
 
         tblMaterial.setModel(new javax.swing.table.DefaultTableModel(
@@ -93,7 +159,7 @@ public class MaterialFrame extends javax.swing.JFrame {
         btnMDelete.setText("Delete Material");
         btnMDelete.addActionListener(this::btnMDeleteActionPerformed);
 
-        btnMReturn.setText("Return");
+        btnMReturn.setText("Back to Dashboard");
         btnMReturn.addActionListener(this::btnMReturnActionPerformed);
 
         jLabel2.setText("ID:");
@@ -104,33 +170,13 @@ public class MaterialFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Reorder:");
 
+        btnToggleTheme.setText("☀ Light");
+        btnToggleTheme.addActionListener(this::btnToggleThemeActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(297, 297, 297))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)))
-                        .addGap(33, 33, 33))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnMAdd)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnMView)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMUpdate)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMReturn)
-                        .addGap(66, 66, 66))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,13 +200,36 @@ public class MaterialFrame extends javax.swing.JFrame {
                                 .addGap(28, 28, 28)
                                 .addComponent(txtMMatName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(347, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(173, 173, 173)
+                .addComponent(btnToggleTheme)
+                .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnMAdd)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnMView)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMUpdate)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMReturn)
+                        .addGap(10, 10, 10))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addGap(13, 13, 13)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnToggleTheme))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMMatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -176,16 +245,16 @@ public class MaterialFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMMatReorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMAdd)
                     .addComponent(btnMView)
                     .addComponent(btnMUpdate)
                     .addComponent(btnMDelete)
                     .addComponent(btnMReturn))
-                .addGap(31, 31, 31))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -195,7 +264,13 @@ public class MaterialFrame extends javax.swing.JFrame {
     
     private void btnMAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMAddActionPerformed
         String error = materialController.addMaterial(txtMMatID.getText(), txtMMatName.getText(),
-        txtMMatQuantity.getText(), txtMMatReorder.getText());
+                txtMMatQuantity.getText(), txtMMatReorder.getText());
+        if (error == null) {
+            JOptionPane.showMessageDialog(this, "Material added successfully.");
+            materialController.loadMaterials(tableModel);
+        } else {
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnMAddActionPerformed
 
     private void btnMViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMViewActionPerformed
@@ -204,16 +279,29 @@ public class MaterialFrame extends javax.swing.JFrame {
 
     private void btnMUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMUpdateActionPerformed
         String error = materialController.updateMaterial(txtMMatID.getText(), txtMMatName.getText(),
-        txtMMatQuantity.getText(), txtMMatReorder.getText());
-
+                txtMMatQuantity.getText(), txtMMatReorder.getText());
+        if (error == null) {
+            JOptionPane.showMessageDialog(this, "Material updated successfully.");
+            materialController.loadMaterials(tableModel);
+        } else {
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnMUpdateActionPerformed
 
     private void btnMDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMDeleteActionPerformed
         String error = materialController.deleteMaterial(txtMMatID.getText());
+        if (error == null) {
+            JOptionPane.showMessageDialog(this, "Material deleted successfully.");
+            materialController.loadMaterials(tableModel);
+        } else {
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnMDeleteActionPerformed
 
     private void btnMReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMReturnActionPerformed
-        // TODO add your handling code here:
+        DashboardForm dashboardForm = new DashboardForm();
+        dashboardForm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnMReturnActionPerformed
 
     private void tblMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMaterialMouseClicked
@@ -225,6 +313,17 @@ public class MaterialFrame extends javax.swing.JFrame {
             txtMMatReorder.setText(tblMaterial.getValueAt(row, 3).toString());
         }
     }//GEN-LAST:event_tblMaterialMouseClicked
+
+    private void btnToggleThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleThemeActionPerformed
+        util.ThemeManager.isDarkMode = !util.ThemeManager.isDarkMode;
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
+    }//GEN-LAST:event_btnToggleThemeActionPerformed
     
     /**
      * @param args the command line arguments
@@ -257,6 +356,7 @@ public class MaterialFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnMReturn;
     private javax.swing.JButton btnMUpdate;
     private javax.swing.JButton btnMView;
+    private javax.swing.JButton btnToggleTheme;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

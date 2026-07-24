@@ -25,7 +25,7 @@ public class MaterialController {
             tableModel.setRowCount(0);
             for (Material m : materials) {
                 tableModel.addRow(new Object[]{
-                        m.getMaterialId(), m.getName(), m.getQuantity(), m.getReorder()
+                        m.getMaterialId(), m.getMaterialName(), m.getQuantity(), m.getReorderLevel()
                 });
             }
             return null;

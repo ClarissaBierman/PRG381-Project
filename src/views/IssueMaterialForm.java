@@ -11,6 +11,38 @@ import java.sql.ResultSet;
 public class IssueMaterialForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(IssueMaterialForm.class.getName());
+    
+    private void applyDarkMode() {
+        getContentPane().setBackground(new java.awt.Color(15, 23, 42));
+        lblCleaner.setForeground(new java.awt.Color(226, 232, 240));
+        lblMaterial.setForeground(new java.awt.Color(226, 232, 240));
+        lblQuantity.setForeground(new java.awt.Color(226, 232, 240));
+        lblCleaner1.setForeground(new java.awt.Color(255, 255, 255));
+        txtQuantity.setBackground(new java.awt.Color(30, 41, 59));
+        txtQuantity.setForeground(new java.awt.Color(226, 232, 240));
+        txtQuantity.setCaretColor(java.awt.Color.WHITE);
+        cmbCleaner.setBackground(new java.awt.Color(30, 41, 59));
+        cmbCleaner.setForeground(new java.awt.Color(226, 232, 240));
+        cmbMaterial.setBackground(new java.awt.Color(30, 41, 59));
+        cmbMaterial.setForeground(new java.awt.Color(226, 232, 240));
+        repaint();
+    }
+
+    private void applyLightMode() {
+        getContentPane().setBackground(new java.awt.Color(248, 250, 252));
+        lblCleaner.setForeground(new java.awt.Color(15, 23, 42));
+        lblMaterial.setForeground(new java.awt.Color(15, 23, 42));
+        lblQuantity.setForeground(new java.awt.Color(15, 23, 42));
+        lblCleaner1.setForeground(new java.awt.Color(15, 23, 42));
+        txtQuantity.setBackground(java.awt.Color.WHITE);
+        txtQuantity.setForeground(new java.awt.Color(15, 23, 42));
+        txtQuantity.setCaretColor(java.awt.Color.BLACK);
+        cmbCleaner.setBackground(java.awt.Color.WHITE);
+        cmbCleaner.setForeground(new java.awt.Color(15, 23, 42));
+        cmbMaterial.setBackground(java.awt.Color.WHITE);
+        cmbMaterial.setForeground(new java.awt.Color(15, 23, 42));
+        repaint();
+    }
 
     private void loadCleaners() {
 
@@ -87,6 +119,14 @@ private void loadMaterials() {
     
     public IssueMaterialForm() {
         initComponents();
+        setLocationRelativeTo(null);
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
         
         setTitle(
         "University Cleaning Inventory System");
@@ -120,8 +160,10 @@ private void loadMaterials() {
         txtQuantity = new javax.swing.JTextField();
         btnIssue = new javax.swing.JButton();
         lblCleaner1 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        btnToggleTheme = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(javax.swing.UIManager.getDefaults().getColor("Desktop.background"));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(255, 193, 169));
@@ -140,56 +182,73 @@ private void loadMaterials() {
         lblCleaner1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCleaner1.setText("Issue Cleaning Materials");
 
+        btnBack.setText("Back to Dashboard");
+        btnBack.addActionListener(this::btnBackActionPerformed);
+
+        btnToggleTheme.setText("☀ Light");
+        btnToggleTheme.addActionListener(this::btnToggleThemeActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnIssue)
+                        .addGap(66, 66, 66)
+                        .addComponent(btnBack))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbMaterial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(140, 140, 140)
+                                .addComponent(lblCleaner1)
+                                .addGap(51, 51, 51))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCleaner, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbCleaner, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(135, 135, 135))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(lblCleaner1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(btnIssue)))
-                .addGap(139, 139, 139))
+                                .addGap(61, 61, 61)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(cmbMaterial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblCleaner, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(cmbCleaner, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(btnToggleTheme)))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCleaner1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCleaner1)
+                    .addComponent(btnToggleTheme))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCleaner)
                     .addComponent(cmbCleaner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMaterial)
                     .addComponent(cmbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuantity)
                     .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnIssue)
-                .addGap(51, 51, 51))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIssue)
+                    .addComponent(btnBack))
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -267,6 +326,23 @@ private void loadMaterials() {
     }
     }//GEN-LAST:event_btnIssueActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        DashboardForm dashboardForm = new DashboardForm();
+        dashboardForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnToggleThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleThemeActionPerformed
+        util.ThemeManager.isDarkMode = !util.ThemeManager.isDarkMode;
+        if (util.ThemeManager.isDarkMode) {
+            applyDarkMode();
+            btnToggleTheme.setText("☀ Light");
+        } else {
+            applyLightMode();
+            btnToggleTheme.setText("🌙 Dark");
+        }
+    }//GEN-LAST:event_btnToggleThemeActionPerformed
+
    
     public static void main(String args[]) {
        
@@ -276,7 +352,9 @@ private void loadMaterials() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnIssue;
+    private javax.swing.JButton btnToggleTheme;
     private javax.swing.JComboBox<String> cmbCleaner;
     private javax.swing.JComboBox<String> cmbMaterial;
     private javax.swing.JLabel lblCleaner;
